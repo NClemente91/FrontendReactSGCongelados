@@ -1,0 +1,35 @@
+.product-container {
+  width: 800px;
+  height: 400px;
+  background-color: white;
+  display: flex;
+  border-radius: 3px;
+  border: 1px solid gray;
+}
+
+.product-img {
+  width: 400px;
+}
+.product-card-img {
+  width: 380px;
+  margin: 10px;
+}
+
+.product-body {
+  width: 400px;
+}
+
+.product-body-h5 {
+  font-size: 30px;
+  color: #27571b;
+  font-weight: 500;
+}
+.btn-controller {
+  display: block;
+  margin-top: 40px;
+}
+
+#bg-color-btn {
+  background-color: #27571b;
+  border: #27571b;
+}

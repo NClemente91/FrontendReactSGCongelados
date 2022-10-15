@@ -1,0 +1,101 @@
+.productContainerGrl {
+  text-align: center;
+  width: 100vw;
+  min-height: calc(100vh - 200px);
+  background-image: url("../../utils/images/FondoClaro.png");
+  background-position: center;
+  background-repeat: repeat;
+}
+
+.productContainerGrl a {
+  text-decoration: none;
+  color: #27571b;
+}
+.productContainerGrl a:hover {
+  color: #f25c05;
+}
+
+.productContainer-navGral {
+  width: 90%;
+  height: 75px;
+  margin: 0 auto;
+  position: relative;
+  top: 20px;
+}
+.productContainer-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.itemCategory {
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 5px;
+  font-size: 1.25rem;
+  color: #f25c05;
+  text-decoration: none;
+}
+
+.itemCategory:hover {
+  background-color: #27571b;
+  color: white;
+}
+
+.loader {
+  border: 20px solid #ec925d;
+  border-top: 20px solid #297017;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  margin: 100px auto;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.fade-in {
+  margin-top: 25px;
+  font-size: 21px;
+  text-align: center;
+
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 2s; /* Firefox < 16 */
+  -o-animation: fadein 2s; /* Opera < 12.1 */
+  animation: fadein 2s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

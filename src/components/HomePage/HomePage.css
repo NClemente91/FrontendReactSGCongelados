@@ -1,0 +1,46 @@
+.homePage-container {
+  width: 100vw;
+  height: calc(100vh - 200px);
+  background-image: url("../../utils/images/FondoOscuro.png");
+  background-size: cover;
+}
+
+.homePage-container-info {
+  width: 90%;
+  margin: 0 auto;
+  height: 80vh;
+}
+.homePage-container-info-img {
+  position: relative;
+  width: 400px;
+  height: 55%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.homePage-container-info-span {
+  width: 80%;
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #f25c05;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.btn-container {
+  width: 500px;
+  margin: 20px auto 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-container-text {
+  color: #f25c05;
+  font-weight: 600;
+}

@@ -1,0 +1,11 @@
+.detailContainerGrl {
+  min-height: calc(100vh - 200px);
+  background-image: url("../../utils/images/FondoClaro.png");
+  background-position: center;
+  background-repeat: repeat-y;
+  background-size: cover;
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}

@@ -1,0 +1,72 @@
+.cartContainerGrl {
+  width: 100vw;
+  min-height: calc(100vh - 200px);
+  background-image: url("../../utils/images/FondoClaro.png");
+  background-position: center;
+  background-repeat: repeat;
+}
+.aling-text {
+  text-align: center;
+}
+
+.cartContainerGrl-titulo {
+  width: 90%;
+  height: 100px;
+  margin: 0 auto;
+  padding-top: 20px;
+  text-align: center;
+  color: #f25c05;
+}
+
+.cartContainerGrl-empty {
+  width: 320px;
+  height: 320px;
+  margin: 0 auto;
+  background-color: white;
+}
+.cartContainerGrl-empty_title {
+  font-size: 25px;
+  width: 90%;
+  margin: 5px auto;
+}
+.cartContainerGrl-empty_image {
+  width: 200px;
+  margin: 15px auto;
+}
+.cartContainerGrl-empty_a {
+  text-align: center;
+}
+
+.cartContainerGrl-description {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+}
+.cartContainerGrl-description_table {
+  width: 90%;
+  margin: 0 auto;
+  background-color: white;
+}
+.cartContainerGrl-description_tableTitle,
+.cartContainerGrl-description_resumenTitle {
+  color: #27571b;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.card-img-prod {
+  width: 100px;
+  height: 100px;
+}
+
+.resumen-title {
+  font-size: 20px;
+  padding: 5px 25px;
+}
+.resumen-title_span {
+  font-weight: 600;
+}
+.center-btn {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}

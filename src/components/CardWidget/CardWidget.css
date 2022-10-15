@@ -1,0 +1,25 @@
+.logoCarrito {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.opacityCard {
+  opacity: 0.4;
+}
+
+.logoCarrito-link {
+  text-decoration: none;
+}
+
+.logoCarrito-link-quantity {
+  color: #f25c05;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.logoCarrito-link-img {
+  width: 50px;
+  margin: 25px auto;
+}

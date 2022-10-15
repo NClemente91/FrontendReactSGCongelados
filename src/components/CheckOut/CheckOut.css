@@ -1,0 +1,94 @@
+.checkoutContainerGrl {
+  width: 100vw;
+  min-height: calc(100vh - 200px);
+  background-image: url("../../utils/images/FondoClaro.png");
+  background-position: center;
+  background-repeat: repeat;
+}
+.checkoutContainerGrl-description {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+}
+
+.checkoutContainerGrl-description_resumen,
+.checkoutContainerGrl-description_form {
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: 30px;
+  background-color: white;
+}
+
+.checkoutContainerGrl-description_title,
+.checkoutContainerGrl-finallyBuy_title {
+  color: #27571b;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+.checkoutContainerGrl-description_text {
+  width: 95%;
+  margin: 20px auto;
+  font-weight: 500;
+}
+
+.productResumenContainer {
+  width: 80%;
+  margin: 5px auto;
+  display: flex;
+}
+.productResumenContainer_image {
+  width: 75px;
+  height: 75px;
+  margin: 5px 15px;
+}
+
+.productResumenContainer-text {
+  width: 100px;
+  margin: 5px 40px 5px;
+}
+.productResumenContainer-text_p {
+  margin: 0;
+  font-style: oblique;
+}
+
+.form-control {
+  min-width: 300px;
+  margin-left: 20px;
+}
+.form-label {
+  min-width: 300px;
+  margin-left: 15px;
+  margin-top: 5px;
+}
+
+.checkoutContainerGrl-form_button {
+  width: 200px;
+  height: 80px;
+  position: relative;
+  top: 20px;
+  left: 20px;
+}
+.color-btn {
+  color: #f25c05;
+}
+
+.checkoutContainerGrl-finallyBuy {
+  width: 500px;
+  height: 400px;
+  margin: 0 auto;
+  background-color: white;
+  position: relative;
+  top: 40px;
+}
+.checkoutContainerGrl-finallyBuy-order {
+  width: 90%;
+  margin: 15px auto;
+}
+.checkoutContainerGrl-finallyBuy-order_p {
+  font-weight: 700;
+}
+.btn-finally {
+  position: relative;
+  left: 175px;
+}
