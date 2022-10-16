@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeItem, clearCart } from "../../store/slices/cart/cartSlice";
 
 import "../Cart/Cart.css";
+import ItemCountCart from "../ItemCountCart/ItemCountCart";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -67,7 +68,9 @@ const Cart = () => {
                             />
                           </td>
                           <td>{pC.items.name}</td>
-                          <td>{pC.quantities} un.</td>
+                          <td>
+                            <ItemCountCart element={pC} />
+                          </td>
                           <td>${pC.items.unitPrice * pC.quantities}</td>
                           <td>
                             <button

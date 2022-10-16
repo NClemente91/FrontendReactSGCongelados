@@ -1,16 +1,15 @@
-import React, { useContext, useState } from "react";
-import { CartContext } from "../../context/CartContext";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import "../CheckOut/CheckOut.css";
+import { useDispatch, useSelector } from "react-redux";
+import { postOrder } from "../../store/slices/cart/thunks";
 
 const CheckOut = () => {
-  const [loading, setLoading] = useState(false);
-
-  const [orderID, setOrderID] = useState([]);
-
-  //Saqué clear
-  const { cartState, totalQuantity, totalPrice } = useContext(CartContext);
+  const dispatch = useDispatch();
+  let { cart, totalQuantity, totalPrice, isLoadingOrder } = useSelector(
+    (state) => state.cart
+  );
 
   const [buyer, setBuyer] = useState({
     name: "",
@@ -25,48 +24,12 @@ const CheckOut = () => {
   };
 
   const saveOrder = () => {
-    console.log("Llego a guardar");
-    // const db = getFireStore();
-
-    // const cartFinal = [];
-
-    // cartState.forEach((pCm) => {
-    //   cartFinal.push({
-    //     id: pCm.items.id,
-    //     title: pCm.items.title,
-    //     price: pCm.items.price,
-    //   });
-
-    //   const itemStockUpdate = db.collection("items").doc(pCm.items.id);
-    //   const stockUpdated = pCm.items.stock - pCm.quantities;
-
-    //   itemStockUpdate.update({
-    //     stock: stockUpdated,
-    //   });
-    // });
-
-    // const order = db.collection("orders");
-    // const newOrder = {
-    //   buyer: buyer,
-    //   date: firebase.firestore.Timestamp.fromDate(new Date()),
-    //   total: totalPrice(),
-    //   items: cartFinal,
-    // };
-    // order
-    //   .add(newOrder)
-    //   .then(({ id }) => {
-    //     setOrderID(id);
-    //     clear();
-    //     setLoading(true);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    dispatch(postOrder(cart));
   };
 
   return (
     <div className="checkoutContainerGrl">
-      {!loading && (
+      {!isLoadingOrder && (
         <div className="checkoutContainerGrl-description">
           <div className="col-6">
             <div className="checkoutContainerGrl-description_resumen">
@@ -74,10 +37,10 @@ const CheckOut = () => {
                 Resumen de compra
               </h2>
               <p className="checkoutContainerGrl-description_text">
-                Estas llevando {totalQuantity()} producto/s
+                Estas llevando {totalQuantity} producto/s
               </p>
               <div>
-                {cartState?.map((pC) => {
+                {cart?.map((pC) => {
                   return (
                     <div
                       key={pC.items.productId}
@@ -101,7 +64,7 @@ const CheckOut = () => {
                 })}
               </div>
               <p className="checkoutContainerGrl-description_text">
-                Precio total:$ {totalPrice()}
+                Precio total:$ {totalPrice}
               </p>
             </div>
           </div>
@@ -156,7 +119,7 @@ const CheckOut = () => {
         </div>
       )}
 
-      {loading && (
+      {isLoadingOrder && (
         <div className="checkoutContainerGrl-finallyBuy">
           <h2 className="checkoutContainerGrl-finallyBuy_title">
             Muchas gracias por tu compra
@@ -167,7 +130,7 @@ const CheckOut = () => {
           <p className="checkoutContainerGrl-finallyBuy-order">
             Tu nro de orden es:{" "}
             <span className="checkoutContainerGrl-finallyBuy-order_p">
-              {orderID}
+              {}AGREGAR ALGO ACA!!!!!!!!!!
             </span>
             . Recirás un email cuando tu pedido esté listo para ser retirado.
           </p>
