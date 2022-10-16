@@ -1,17 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { CartContext } from "../../context/CartContext";
+import { useDispatch } from "react-redux";
+import { addItem } from "../../store/slices/cart/cartSlice";
 import ItemCount from "../ItemCount/ItemCount";
 import "../ItemDetail/ItemDetail.css";
 
 const ItemDetail = ({ element }) => {
+  const dispatch = useDispatch();
   const [eventAdd, setEventAdd] = useState(false);
 
-  const { addItem } = useContext(CartContext);
-
   const onAdd = (cant) => {
-    addItem(element[0], cant);
+    dispatch(addItem({ item: element[0], quantity: cant }));
     setEventAdd(true);
   };
 

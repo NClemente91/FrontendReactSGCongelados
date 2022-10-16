@@ -1,27 +1,28 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-import { CartContext } from "../../context/CartContext";
+import { useDispatch, useSelector } from "react-redux";
+import { removeItem, clearCart } from "../../store/slices/cart/cartSlice";
 
 import "../Cart/Cart.css";
 
 const Cart = () => {
-  const { cartState, removeItem, clear, totalQuantity, totalPrice } =
-    useContext(CartContext);
+  const dispatch = useDispatch();
+  let { cart, totalQuantity, totalPrice } = useSelector((state) => state.cart);
 
-  const clearCart = () => {
-    clear();
+  const clearTotalCart = () => {
+    dispatch(clearCart());
   };
 
   const clearPartialCart = (ident) => {
-    removeItem(ident);
+    dispatch(removeItem(ident));
   };
 
   return (
     <div className="cartContainerGrl">
       <h1 className="cartContainerGrl-titulo"> Carrito de compras</h1>
       <div>
-        {cartState[0].quantities === 0 ? (
+        {totalQuantity === 0 ? (
           <div className="cartContainerGrl-empty">
             <h3 className="cartContainerGrl-empty_title">
               Carrito de Compras Vacío
@@ -55,7 +56,7 @@ const Cart = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {cartState.map((pC) => {
+                    {cart.map((pC) => {
                       return (
                         <tr key={pC.items.productId}>
                           <td>
@@ -90,7 +91,7 @@ const Cart = () => {
                       <td>
                         <button
                           className="btn btn-danger"
-                          onClick={() => clearCart()}
+                          onClick={() => clearTotalCart()}
                         >
                           Limpiar Carrito
                         </button>
@@ -108,18 +109,18 @@ const Cart = () => {
                 <div className="mb-5">
                   <h4 className="resumen-title">
                     <span className="resumen-title_span">Cant. Prod:</span>{" "}
-                    {totalQuantity()} un.
+                    {totalQuantity} un.
                   </h4>
                   <h4 className="resumen-title">
                     <span className="resumen-title_span">SubTotal:</span> ${" "}
-                    {totalPrice()}
+                    {totalPrice}
                   </h4>
                   <h4 className="resumen-title">
                     <span className="resumen-title_span">Envío:</span> Gratis
                   </h4>
                   <h4 className="resumen-title">
                     <span className="resumen-title_span">TOTAL:</span> ${" "}
-                    {totalPrice()}
+                    {totalPrice}
                   </h4>
                 </div>
                 <Link to="/checkout">
