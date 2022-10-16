@@ -11,26 +11,28 @@ const ItemDetail = ({ element }) => {
   const { addItem } = useContext(CartContext);
 
   const onAdd = (cant) => {
-    addItem(element, cant);
+    addItem(element[0], cant);
     setEventAdd(true);
   };
 
   return (
     <>
       {element.length !== 0 ? (
-        <div className="product-container" key={element.productId}>
+        <div className="product-container" key={element[0].productId}>
           <div className="product-img">
             <img
-              src={element.imageUrl}
+              src={element[0].imageUrl}
               className="product-card-img"
               alt="Imagen de producto"
             />
           </div>
           <div className="product-body">
-            <h5 className="card-title mt-3 product-body-h5">{element.name}</h5>
-            <p className="card-text mt-2">{element.description}</p>
+            <h5 className="card-title mt-3 product-body-h5">
+              {element[0].name}
+            </h5>
+            <p className="card-text mt-2">{element[0].description}</p>
             {!eventAdd ? (
-              <ItemCount stock={element.stock} initial={0} onAdd={onAdd} />
+              <ItemCount stock={element[0].stock} initial={0} onAdd={onAdd} />
             ) : (
               <div className="btn-controller">
                 <Link className="btn-controller" to="/categorias/todos">
@@ -45,7 +47,7 @@ const ItemDetail = ({ element }) => {
                 </Link>
               </div>
             )}
-            <p className="card-text mt-5">$ {element.unitPrice}</p>
+            <p className="card-text mt-5">$ {element[0].unitPrice}</p>
           </div>
         </div>
       ) : (

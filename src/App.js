@@ -1,8 +1,7 @@
 import { CartProvider } from "./context/CartContext";
 
-// REDUX
-// import { Provider } from "react-redux";
-// import { store } from "./store/slices";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 import AppRouter from "./routes/AppRouter";
 
@@ -10,15 +9,11 @@ import "./App.css";
 
 const App = () => {
   return (
-    // REDUX
-    // <Provider store={store}>
-    //   <AppRouter />
-    // </Provider>
-
-    // CONTEXT
-    <CartProvider>
-      <AppRouter />
-    </CartProvider>
+    <Provider store={store}>
+      <CartProvider>
+        <AppRouter />
+      </CartProvider>
+    </Provider>
   );
 };
 

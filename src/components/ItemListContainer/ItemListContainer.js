@@ -1,46 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import "../ItemListContainer/ItemListContainer.css";
 import ItemList from "../ItemList/ItemList";
-// import { getAllProducts } from "../../services/productsService";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../store/slices/products/thunks";
 
 const ItemListContainer = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  let { products, isLoading } = useSelector((state) => state.products);
   const { category } = useParams();
 
   useEffect(() => {
-    setLoading(true);
-    if (category === "todos") {
-      // getAllProducts()
-      //   .then((data) => setProducts(data))
-
-      fetch("http://localhost:8080/product/all?page=0&size=23")
-        .then((data) => data.json())
-        .then((res) => {
-          if (res.data.results.length === 0) {
-            console.log("No hay resultados");
-            return;
-          }
-          setProducts(res.data.results);
-        })
-        .catch((e) => console.log(e))
-        .finally(setLoading(false));
-    } else {
-      fetch(`http://localhost:8080/product/category/${category}?page=0&size=23`)
-        .then((data) => data.json())
-        .then((res) => {
-          if (res.data.results.length === 0) {
-            console.log("No hay resultados");
-            return;
-          }
-          setProducts(res.data.results);
-        })
-        .catch((e) => console.log(e))
-        .finally(setLoading(false));
-    }
-  }, [category]);
+    dispatch(getProducts(category));
+  }, [category, dispatch]);
 
   return (
     <div className="productContainerGrl">
@@ -60,8 +33,8 @@ const ItemListContainer = () => {
           </Link>
         </div>
       </section>
-      {loading && <div className="loader center-spin" />}
-      {!loading && <ItemList products={products} />}
+      {isLoading && <div className="loader center-spin" />}
+      {!isLoading && <ItemList products={products} />}
     </div>
   );
 };

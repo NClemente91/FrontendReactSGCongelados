@@ -1,34 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { getProduct } from "../../store/slices/products/thunks";
 
 import ItemDetail from "../ItemDetail/ItemDetail";
 import "../ItemDetailContainer/ItemDetailContainer.css";
 
 const ItemDetailContainer = () => {
-  const [itemDetail, setItemDetail] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  let { productDetail, isLoading } = useSelector((state) => state.products);
   const { idP } = useParams();
 
   useEffect(() => {
-    setLoading(true);
-
-    fetch(`http://localhost:8080/product/${idP}`)
-      .then((data) => data.json())
-      .then((res) => {
-        if (res.data === null) {
-          console.log("No hay resultados");
-          return;
-        }
-        setItemDetail(res.data);
-      })
-      .catch((e) => console.log(e))
-      .finally(setLoading(false));
-  }, [idP]);
+    dispatch(getProduct(idP));
+  }, [idP, dispatch]);
 
   return (
     <div className="detailContainerGrl">
-      {loading && <div className="loader center-spin" />}
-      {!loading && <ItemDetail element={itemDetail} />}
+      {isLoading && <div className="loader center-spin" />}
+      {!isLoading && <ItemDetail element={productDetail} />}
     </div>
   );
 };
