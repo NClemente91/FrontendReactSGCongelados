@@ -57,8 +57,8 @@ const ItemCount = ({ stock, initial, onAdd }) => {
           >
             Agregar
           </button>
-          <div>
-            <span>Stock Disponible: {stock}</span>
+          <div className="mt-2">
+            <span>{stock} disponibles</span>
           </div>
         </div>
       </div>

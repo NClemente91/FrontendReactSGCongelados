@@ -1,6 +1,6 @@
 import { saveOrder } from "../../../services/ordersService";
 
-import { startLoadingOrder, setOrder } from "./cartSlice";
+import { startLoadingOrder, setOrder, clearCart } from "./cartSlice";
 
 export const postOrder = (cartToSave) => {
   return async (dispatch) => {
@@ -21,5 +21,7 @@ export const postOrder = (cartToSave) => {
     const savedOrder = await saveOrder(order);
 
     dispatch(setOrder({ order: savedOrder }));
+
+    dispatch(clearCart());
   };
 };

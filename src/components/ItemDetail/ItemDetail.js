@@ -32,7 +32,7 @@ const ItemDetail = ({ element }) => {
             </h5>
             <p className="card-text mt-2">{element[0].description}</p>
             {!eventAdd ? (
-              <ItemCount stock={element[0].stock} initial={0} onAdd={onAdd} />
+              <ItemCount stock={element[0].stock} initial={1} onAdd={onAdd} />
             ) : (
               <div className="btn-controller">
                 <Link className="btn-controller" to="/categorias/todos">

@@ -11,18 +11,22 @@ const ItemCountCart = ({ element }) => {
   const [disableRemove, setdisableRemove] = useState(false);
   const [disableAdd, setdisableAdd] = useState(false);
 
-  const addQuantity = (item, quantity) => {
-    dispatch(addOrRemoveOneOfItem({ item, operation: "suma" }));
-    if (quantity < item.stock) {
+  const addQuantity = (element) => {
+    if (element.quantities < element.items.stock) {
+      dispatch(
+        addOrRemoveOneOfItem({ item: element.items, operation: "suma" })
+      );
       setdisableRemove(false);
     } else {
       setdisableAdd(true);
     }
   };
 
-  const removeQuantity = (item, quantity) => {
-    dispatch(addOrRemoveOneOfItem({ item, operation: "resta" }));
-    if (quantity > 2) {
+  const removeQuantity = (element) => {
+    if (element.quantities > 1) {
+      dispatch(
+        addOrRemoveOneOfItem({ item: element.items, operation: "resta" })
+      );
       setdisableAdd(false);
     } else {
       setdisableRemove(true);
@@ -33,7 +37,7 @@ const ItemCountCart = ({ element }) => {
     <div className="containerQuantityProduct mb-3">
       <button
         className="btn btn-secondary btn-sm mr-2"
-        onClick={() => removeQuantity(element.items, element.quantities)}
+        onClick={() => removeQuantity(element)}
         disabled={disableRemove}
       >
         -
@@ -41,7 +45,7 @@ const ItemCountCart = ({ element }) => {
       <span id="quantityProduct">{element.quantities} un</span>
       <button
         className="btn btn-secondary btn-sm"
-        onClick={() => addQuantity(element.items, element.quantities)}
+        onClick={() => addQuantity(element)}
         disabled={disableAdd}
       >
         +
