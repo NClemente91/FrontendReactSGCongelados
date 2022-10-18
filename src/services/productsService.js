@@ -1,16 +1,18 @@
 import { sgCongeladosApi } from "../api/sgCongeladosApi";
 
-export const getAllProducts = async () => {
+export const getAllProducts = async (page) => {
   let products = [];
 
   try {
-    const { data } = await sgCongeladosApi.get(`/product/all?page=0&size=23`);
+    const { data } = await sgCongeladosApi.get(
+      `/product/all?page=${page - 1}&size=6`
+    );
 
     if (data.data.results.length === 0) {
       console.log("No hay resultados");
       return products;
     } else {
-      products = data.data.results;
+      products = data.data;
       return products;
     }
   } catch (error) {
@@ -18,19 +20,19 @@ export const getAllProducts = async () => {
   }
 };
 
-export const getProductsByCategory = async (category) => {
+export const getProductsByCategory = async (category, page) => {
   let products = [];
 
   try {
     const { data } = await sgCongeladosApi.get(
-      `/product/category/${category}?page=0&size=23`
+      `/product/category/${category}?page=${page - 1}&size=6`
     );
 
     if (data.data.results.length === 0) {
       console.log("No hay resultados");
       return products;
     } else {
-      products = data.data.results;
+      products = data.data;
       return products;
     }
   } catch (error) {

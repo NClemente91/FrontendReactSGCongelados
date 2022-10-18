@@ -10,19 +10,27 @@ import {
   setProductDetail,
 } from "./productSlice";
 
-export const getProducts = (category) => {
+export const getProducts = (category, page = 1) => {
   return async (dispatch) => {
     dispatch(startLoadingProduct());
 
     let productData = [];
 
+    //SI CAMBIA LA CATEGORIA RESETEAR, PAGE = 1
+
     if (category === "todos") {
-      productData = await getAllProducts();
+      productData = await getAllProducts(page);
     } else {
-      productData = await getProductsByCategory(category);
+      productData = await getProductsByCategory(category, page);
     }
 
-    dispatch(setProducts({ products: productData }));
+    dispatch(
+      setProducts({
+        products: productData.results,
+        page,
+        totalPages: productData.totalPages,
+      })
+    );
   };
 };
 
