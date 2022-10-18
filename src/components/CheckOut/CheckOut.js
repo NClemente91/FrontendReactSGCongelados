@@ -1,17 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Typography, Alert } from "@mui/material";
 
 import "../CheckOut/CheckOut.css";
 import { useDispatch, useSelector } from "react-redux";
-import { postOrder } from "../../store/slices/cart/thunks";
-import { finishLoadingOrder } from "../../store/slices/cart/cartSlice";
+import { postOrder } from "../../store/slices/orders/thunks";
+import {
+  finishLoadingOrder,
+  setMessage,
+} from "../../store/slices/orders/orderSlice";
 
 const CheckOut = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { cart, totalQuantity, totalPrice, isLoadingOrder, savedOrder } =
-    useSelector((state) => state.cart);
+  const { cart, totalQuantity, totalPrice } = useSelector(
+    (state) => state.cart
+  );
+  const { isLoadingOrder, savedOrder, message } = useSelector(
+    (state) => state.order
+  );
   const { userLogged } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    dispatch(setMessage(null));
+  }, [dispatch]);
 
   const handleSaveOrder = () => {
     let orderToSave = {
@@ -117,9 +129,11 @@ const CheckOut = () => {
           <div className="cartContainerGrl-empty_image">
             <img src="/assets/images/icons/cf-icon.svg" alt="Logo triste" />
           </div>
+          <Typography component="h6" variant="h6">
+            {message && <Alert severity={message.type}>{message.detail}</Alert>}
+          </Typography>
           <p className="checkoutContainerGrl-finallyBuy-order">
-            Tu orden fue registrada con exito en nuestro sistema. Guarda el
-            siguiente código
+            Guarda el siguiente código
             <span className="checkoutContainerGrl-finallyBuy-order_p">
               {" "}
               {savedOrder.orderId}
@@ -127,6 +141,18 @@ const CheckOut = () => {
             </span>
             para poder recibir tu compra. El pedido se despacha a las 24 hs de
             la compra.
+          </p>
+          <p className="checkoutContainerGrl-finallyBuy-order">
+            El pago podrá ser en{" "}
+            <span className="checkoutContainerGrl-finallyBuy-order_p">
+              {" "}
+              efectivo{" "}
+            </span>{" "}
+            al recibir el envío o vía transferencia al{" "}
+            <span className="checkoutContainerGrl-finallyBuy-order_p">
+              {" "}
+              CBU 1234567890123456789{" "}
+            </span>
           </p>
           <p className="checkoutContainerGrl-finallyBuy-order">
             Fecha de carga

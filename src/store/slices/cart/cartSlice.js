@@ -12,18 +12,6 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    startLoadingOrder: (state) => {
-      state.isLoadingOrder = true;
-    },
-
-    finishLoadingOrder: (state) => {
-      state.isLoadingOrder = false;
-    },
-
-    setOrder: (state, action) => {
-      state.savedOrder = action.payload.order;
-    },
-
     addItem: (state, action) => {
       const item = action.payload.item;
       const quantity = action.payload.quantity;
@@ -101,12 +89,5 @@ export const cartSlice = createSlice({
   },
 });
 
-export const {
-  startLoadingOrder,
-  finishLoadingOrder,
-  setOrder,
-  addItem,
-  addOrRemoveOneOfItem,
-  removeItem,
-  clearCart,
-} = cartSlice.actions;
+export const { addItem, addOrRemoveOneOfItem, removeItem, clearCart } =
+  cartSlice.actions;

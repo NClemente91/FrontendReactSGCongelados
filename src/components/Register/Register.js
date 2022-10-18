@@ -140,15 +140,15 @@ const Register = () => {
       return false;
     }
 
-    if (!apartment) {
-      dispatch(
-        setMessage({
-          type: "error",
-          detail: "Debes completar la Ciudad",
-        })
-      );
-      return false;
-    }
+    // if (!apartment) {
+    //   dispatch(
+    //     setMessage({
+    //       type: "error",
+    //       detail: "Debes completar el departamento o casa",
+    //     })
+    //   );
+    //   return false;
+    // }
 
     if (!streetNumber) {
       dispatch(
@@ -237,12 +237,12 @@ const Register = () => {
                     required
                     fullWidth
                     id="email"
-                    label="email"
+                    label="Email"
                     name="email"
                     autoComplete="email"
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     fullWidth
@@ -253,7 +253,7 @@ const Register = () => {
                     autoComplete="new-password"
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     fullWidth
@@ -290,8 +290,8 @@ const Register = () => {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
-                    required
                     fullWidth
+                    defaultValue="Casa"
                     name="apartment"
                     label="Departamento"
                     id="apartment"
@@ -318,7 +318,7 @@ const Register = () => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Register
+                Registrarse
               </Button>
               <Grid container justifyContent="center" sx={{ mb: 2 }}>
                 <Grid item>
