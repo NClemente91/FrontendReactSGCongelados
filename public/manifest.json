@@ -1,7 +1,23 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [],
+  "short_name": "SG",
+  "name": "SG Congelados",
+  "icons": [
+    {
+      "src": "/assets/images/icons/logo-fb.svg",
+      "sizes": "150x150",
+      "type": "image/svg"
+    },
+    {
+      "src": "/assets/images/icons/logo-wsp.svg",
+      "sizes": "150x150",
+      "type": "image/svg"
+    },
+    {
+      "src": "/assets/images/icons/logo-ig.svg",
+      "sizes": "150x150",
+      "type": "image/svg"
+    }
+  ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
