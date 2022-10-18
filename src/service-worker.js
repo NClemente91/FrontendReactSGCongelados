@@ -15,10 +15,18 @@ const CACHE_DYNAMIC = "cache-dynamic-nico-v1";
 //Recursos que no son nuestros y no cambian en la vida de la página. Ej Bootstrap, Google fonts
 const CACHE_INMUTABLE = "cache-inmutable-nico-v1";
 
-// const APP_SHELL = ["/favicon.ico", "/", "index.html"];
-const APP_SHELL = ["/", "/index.html", "/static/media/"]; //cualquier otra imagen que sea "común" y no cambie en la pagina como un logo o una imagen de fondo
+const APP_SHELL = ["/favicon.ico", "/", "index.html"]; //cualquier otra imagen que sea "común" y no cambie en la pagina como un logo o una imagen de fondo
 
 const APP_SHELL_INMUTABLE = [];
+
+// This allows the web app to trigger skipWaiting via registration.waiting.postMessage({type: 'SKIP_WAITING'})
+self.addEventListener("message", (e) => {
+  if (e.data && e.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
+// Any other custom service worker logic can go here.
 
 self.addEventListener("install", (e) => {
   const promesaStatic = caches
