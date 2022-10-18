@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/slices/users/thunks";
 import { setMessage } from "../../store/slices/users/userSlice";
 
+import "../Login/Login.css";
+
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
@@ -22,7 +24,15 @@ const theme = createTheme();
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { message } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const { message, isLogged } = useSelector((state) => state.user);
+
+  React.useEffect(() => {
+    if (isLogged) {
+      navigate("/");
+    }
+    dispatch(setMessage(null));
+  }, [dispatch, isLogged, navigate]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -32,7 +42,6 @@ const Login = () => {
         password: event.target.password.value,
       };
       dispatch(loginUser(userLogged));
-      dispatch(setMessage());
     }
   };
 
@@ -78,15 +87,15 @@ const Login = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid container component="main" className="container-login">
         <CssBaseline />
         <Grid
+          className="image-login"
           item
           xs={false}
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url()",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -107,11 +116,11 @@ const Login = () => {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <Avatar sx={{ m: 1, bgcolor: "rgb(57,118,61)" }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Login
+              Iniciar Sesión
             </Typography>
             <Box
               component="form"
@@ -154,7 +163,7 @@ const Login = () => {
               </Button>
               <Grid container justifyContent="center">
                 <Grid item>
-                  <Link to="/register">"Don't have an account? Register"</Link>
+                  <Link to="/register">¿No estás registrado? Click acá</Link>
                 </Grid>
               </Grid>
             </Box>

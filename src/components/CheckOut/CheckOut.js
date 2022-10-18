@@ -4,18 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import "../CheckOut/CheckOut.css";
 import { useDispatch, useSelector } from "react-redux";
 import { postOrder } from "../../store/slices/cart/thunks";
+import { finishLoadingOrder } from "../../store/slices/cart/cartSlice";
 
 const CheckOut = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {
-    cart,
-    totalQuantity,
-    totalPrice,
-    isLoadingOrder,
-    finishLoadingOrder,
-    savedOrder,
-  } = useSelector((state) => state.cart);
+  const { cart, totalQuantity, totalPrice, isLoadingOrder, savedOrder } =
+    useSelector((state) => state.cart);
   const { userLogged } = useSelector((state) => state.user);
 
   const handleSaveOrder = () => {
@@ -29,7 +24,7 @@ const CheckOut = () => {
   };
 
   const handleCloseDetailOrder = () => {
-    dispatch(postOrder(finishLoadingOrder()));
+    dispatch(finishLoadingOrder());
     navigate("/");
   };
 
@@ -114,7 +109,7 @@ const CheckOut = () => {
         </div>
       )}
 
-      {isLoadingOrder && savedOrder && (
+      {isLoadingOrder && savedOrder.length !== 0 && (
         <div className="checkoutContainerGrl-finallyBuy">
           <h2 className="checkoutContainerGrl-finallyBuy_title">
             Muchas gracias por tu compra

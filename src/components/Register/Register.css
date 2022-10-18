@@ -1,0 +1,6 @@
+.image-register {
+    background-image: url("../../utils/images/RegisterImg.png");
+}
+.container-register{
+    min-height: calc(100vh - 200px);
+}

@@ -1,0 +1,6 @@
+.image-login {
+    background-image: url("../../utils/images/LoginImg.png");
+}
+.container-login{
+    min-height: calc(100vh - 200px);
+}

@@ -49,12 +49,12 @@ const Navigation = () => {
                 </li>
                 <li className="nav-item">
                   <Link to="/register" className="nav-link">
-                    <span className="nav-link-span">REGISTER</span>
+                    <span className="nav-link-span">REGISTRARSE</span>
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link to="/login" className="nav-link">
-                    <span className="nav-link-span">LOGIN</span>
+                    <span className="nav-link-span">INICIAR SESIÓN</span>
                   </Link>
                 </li>
               </ul>
@@ -67,7 +67,7 @@ const Navigation = () => {
                 </li>
                 <li className="nav-item">
                   <Link to="/cart" className="nav-link">
-                    <span className="nav-link-span">CART</span>
+                    <span className="nav-link-span">CARRITO</span>
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -76,7 +76,7 @@ const Navigation = () => {
                     className="nav-link"
                     onClick={hanldeClickLogout}
                   >
-                    <span className="nav-link-span">LOGOUT</span>
+                    <span className="nav-link-span">CERRAR SESIÓN</span>
                   </Link>
                 </li>
               </ul>

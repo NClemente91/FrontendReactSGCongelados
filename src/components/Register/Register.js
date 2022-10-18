@@ -1,9 +1,10 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../store/slices/users/thunks";
 import { setMessage } from "../../store/slices/users/userSlice";
+
+import "../Register/Register.css";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -23,8 +24,11 @@ const theme = createTheme();
 
 const Register = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { message } = useSelector((state) => state.user);
+
+  React.useEffect(() => {
+    dispatch(setMessage(null));
+  }, [dispatch]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -42,7 +46,6 @@ const Register = () => {
         },
       };
       dispatch(registerUser(newUser));
-      dispatch(setMessage());
     }
   };
 
@@ -162,15 +165,15 @@ const Register = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid container component="main" className="container-register">
         <CssBaseline />
         <Grid
+          className="image-register"
           item
           xs={false}
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url()",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -192,11 +195,11 @@ const Register = () => {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 0, bgcolor: "secondary.main" }}>
+            <Avatar sx={{ m: 0, bgcolor: "rgb(57,118,61)" }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Register
+              Registrate
             </Typography>
             <Box
               component="form"
@@ -210,12 +213,12 @@ const Register = () => {
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
-                    autoComplete="given-name"
-                    name="firstName"
                     required
                     fullWidth
                     id="firstName"
                     label="Nombre"
+                    name="firstName"
+                    autoComplete="given-name"
                     autoFocus
                   />
                 </Grid>
@@ -226,6 +229,7 @@ const Register = () => {
                     id="lastName"
                     label="Apellido"
                     name="lastName"
+                    autoComplete="family-name"
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -235,17 +239,18 @@ const Register = () => {
                     id="email"
                     label="email"
                     name="email"
+                    autoComplete="email"
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    autoComplete="new-password"
                     required
                     fullWidth
                     name="password"
                     label="Contraseña"
                     type="password"
                     id="password"
+                    autoComplete="new-password"
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -256,6 +261,7 @@ const Register = () => {
                     label="Repetir contraseña"
                     type="password"
                     id="samePassword"
+                    autoComplete="new-password"
                   />
                 </Grid>
               </Grid>
@@ -270,6 +276,7 @@ const Register = () => {
                     id="street"
                     label="Calle"
                     name="street"
+                    autoComplete="street-address"
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -313,9 +320,9 @@ const Register = () => {
               >
                 Register
               </Button>
-              <Grid container justifyContent="center">
+              <Grid container justifyContent="center" sx={{ mb: 2 }}>
                 <Grid item>
-                  <Link to="/signin">Already have an account? Login</Link>
+                  <Link to="/signin">¿Ya estás registrado? Click acá</Link>
                 </Grid>
               </Grid>
             </Box>
