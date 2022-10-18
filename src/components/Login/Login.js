@@ -1,7 +1,8 @@
 import * as React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/slices/users/thunks";
+import { setMessage } from "../../store/slices/users/userSlice";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -14,22 +15,65 @@ import {
   Box,
   Grid,
   Typography,
+  Alert,
 } from "@mui/material";
 
 const theme = createTheme();
 
 const Login = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { message } = useSelector((state) => state.user);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const userLogged = {
-      email: event.target.email.value,
-      password: event.target.password.value,
-    };
-    dispatch(loginUser(userLogged));
-    navigate("/");
+    if (verifyData(event.target)) {
+      const userLogged = {
+        email: event.target.email.value,
+        password: event.target.password.value,
+      };
+      dispatch(loginUser(userLogged));
+      dispatch(setMessage());
+    }
+  };
+
+  const verifyData = (data) => {
+    const email = data.email.value;
+    const password = data.password.value;
+
+    if (!email) {
+      dispatch(
+        setMessage({
+          type: "error",
+          detail: "Debes ingresar una dirección de correo electrónico",
+        })
+      );
+      return false;
+    }
+
+    const emailRegex =
+      /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/i;
+
+    if (!emailRegex.test(email)) {
+      dispatch(
+        setMessage({
+          type: "error",
+          detail: "Debes ingresar una dirección de correo electrónico válida",
+        })
+      );
+      return false;
+    }
+
+    if (!password) {
+      dispatch(
+        setMessage({
+          type: "error",
+          detail: "Debes ingresar una contraseña",
+        })
+      );
+      return false;
+    }
+
+    return true;
   };
 
   return (
@@ -95,6 +139,11 @@ const Login = () => {
                 id="password"
                 autoComplete="current-password"
               />
+              <Typography component="h6" variant="h6">
+                {message && (
+                  <Alert severity={message.type}>{message.detail}</Alert>
+                )}
+              </Typography>
               <Button
                 type="submit"
                 fullWidth

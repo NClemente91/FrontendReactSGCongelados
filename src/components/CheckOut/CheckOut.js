@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../CheckOut/CheckOut.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,24 +7,30 @@ import { postOrder } from "../../store/slices/cart/thunks";
 
 const CheckOut = () => {
   const dispatch = useDispatch();
-  let { cart, totalQuantity, totalPrice, isLoadingOrder } = useSelector(
-    (state) => state.cart
-  );
+  const navigate = useNavigate();
+  const {
+    cart,
+    totalQuantity,
+    totalPrice,
+    isLoadingOrder,
+    finishLoadingOrder,
+    savedOrder,
+  } = useSelector((state) => state.cart);
+  const { userLogged } = useSelector((state) => state.user);
 
-  const [buyer, setBuyer] = useState({
-    name: "",
-    phone: "",
-    email: "",
-  });
-  const handleInputChange = (e) => {
-    setBuyer({
-      ...buyer,
-      [e.target.name]: e.target.value,
-    });
+  const handleSaveOrder = () => {
+    let orderToSave = {
+      userEmail: userLogged.email,
+      cart: cart.map((i) => {
+        return { productId: i.items.productId, quantity: i.quantities };
+      }),
+    };
+    dispatch(postOrder(orderToSave));
   };
 
-  const saveOrder = () => {
-    dispatch(postOrder(cart));
+  const handleCloseDetailOrder = () => {
+    dispatch(postOrder(finishLoadingOrder()));
+    navigate("/");
   };
 
   return (
@@ -69,57 +75,46 @@ const CheckOut = () => {
             </div>
           </div>
           <div className="col-6">
-            <div className="checkoutContainerGrl-description_form">
+            <div className="checkoutContainerGrl-description_resumen">
               <h2 className="checkoutContainerGrl-description_title">
-                Completa el siguiente formulario para finalizar su pedido
+                Datos del comprador
               </h2>
-              <form>
-                <div className="col-md-3">
-                  <div>
-                    <label className="form-label">Nombre Completo</label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      name="name"
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    <label className="form-label">Teléfono</label>
-                    <input
-                      className="form-control"
-                      type="phone"
-                      name="phone"
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    <label className="form-label">E-mail: </label>
-                    <input
-                      className="form-control"
-                      type="email"
-                      name="email"
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className="checkoutContainerGrl-form_button">
-                    <button
-                      type="button"
-                      className="btn"
-                      id="bg-color-btn"
-                      onClick={() => saveOrder()}
-                    >
-                      <span className="color-btn">CONFIRMAR COMPRA</span>
-                    </button>
-                  </div>
+              <p className="checkoutContainerGrl-description_text">
+                Pedido a nombre de {userLogged.name} {userLogged.lastName}
+              </p>
+              <p className="checkoutContainerGrl-description_text">
+                Dirección de envio:
+              </p>
+              <div className="productResumenContainer">
+                <div className="productResumenContainer-text">
+                  <p className="productResumenContainer-text_p">
+                    {userLogged.address.street}{" "}
+                    {userLogged.address.streetNumber}
+                  </p>
+                  <p className="productResumenContainer-text_p">
+                    {userLogged.address.apartment}
+                  </p>
+                  <p className="productResumenContainer-text_p">
+                    {userLogged.address.city}
+                  </p>
                 </div>
-              </form>
+              </div>
+              <div className="checkoutContainerGrl-form_button">
+                <button
+                  type="button"
+                  className="btn"
+                  id="bg-color-btn"
+                  onClick={() => handleSaveOrder()}
+                >
+                  <span className="color-btn">CONFIRMAR COMPRA</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
       )}
 
-      {isLoadingOrder && (
+      {isLoadingOrder && savedOrder && (
         <div className="checkoutContainerGrl-finallyBuy">
           <h2 className="checkoutContainerGrl-finallyBuy_title">
             Muchas gracias por tu compra
@@ -128,14 +123,29 @@ const CheckOut = () => {
             <img src="/assets/images/icons/cf-icon.svg" alt="Logo triste" />
           </div>
           <p className="checkoutContainerGrl-finallyBuy-order">
-            Tu nro de orden es:{" "}
+            Tu orden fue registrada con exito en nuestro sistema. Guarda el
+            siguiente código
             <span className="checkoutContainerGrl-finallyBuy-order_p">
-              {}AGREGAR ALGO ACA!!!!!!!!!!
+              {" "}
+              {savedOrder.orderId}
+              {savedOrder.user.name}{" "}
             </span>
-            . Recirás un email cuando tu pedido esté listo para ser retirado.
+            para poder recibir tu compra. El pedido se despacha a las 24 hs de
+            la compra.
+          </p>
+          <p className="checkoutContainerGrl-finallyBuy-order">
+            Fecha de carga
+            <span className="checkoutContainerGrl-finallyBuy-order_p">
+              {" "}
+              {savedOrder.created_at}{" "}
+            </span>
           </p>
           <Link to="/" className="btn-finally">
-            <button className="btn btn-important" id="bg-color-btn">
+            <button
+              className="btn btn-important"
+              id="bg-color-btn"
+              onClick={() => handleCloseDetailOrder()}
+            >
               <span className="color-btn">VOLVER AL INICIO</span>
             </button>
           </Link>

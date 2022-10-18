@@ -16,8 +16,11 @@ export const cartSlice = createSlice({
       state.isLoadingOrder = true;
     },
 
-    setOrder: (state, action) => {
+    finishLoadingOrder: (state) => {
       state.isLoadingOrder = false;
+    },
+
+    setOrder: (state, action) => {
       state.savedOrder = action.payload.order;
     },
 
@@ -100,6 +103,7 @@ export const cartSlice = createSlice({
 
 export const {
   startLoadingOrder,
+  finishLoadingOrder,
   setOrder,
   addItem,
   addOrRemoveOneOfItem,

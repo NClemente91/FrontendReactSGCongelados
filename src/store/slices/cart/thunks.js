@@ -6,22 +6,14 @@ export const postOrder = (cartToSave) => {
   return async (dispatch) => {
     dispatch(startLoadingOrder());
 
-    let cart = cartToSave.map((i) => {
-      return {
-        productId: i.items.productId,
-        quantity: i.quantities,
-      };
-    });
+    const savedOrder = await saveOrder(cartToSave);
 
-    const order = {
-      userEmail: "nico@example.com",
-      cart,
-    };
+    if (savedOrder.responseCode === 201) {
+      dispatch(setOrder({ order: savedOrder.data }));
 
-    const savedOrder = await saveOrder(order);
-
-    dispatch(setOrder({ order: savedOrder }));
-
-    dispatch(clearCart());
+      dispatch(clearCart());
+    } else {
+      console.log("error al cargar la orden");
+    }
   };
 };

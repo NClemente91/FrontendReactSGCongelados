@@ -4,6 +4,7 @@ const initialState = {
   userLogged: {},
   isLogged: false,
   isLoadingUser: false,
+  message: null,
 };
 
 export const userSlice = createSlice({
@@ -12,6 +13,10 @@ export const userSlice = createSlice({
   reducers: {
     startLoadingUser: (state) => {
       state.isLoadingUser = true;
+    },
+
+    finishLoadingUser: (state) => {
+      state.isLoadingUser = false;
     },
 
     setUserLogged: (state, action) => {
@@ -25,7 +30,18 @@ export const userSlice = createSlice({
       state.userLogged = {};
       state.isLogged = false;
     },
+
+    setMessage: (state, action) => {
+      state.isLoading = false;
+      state.message = action.payload;
+    },
   },
 });
 
-export const { startLoadingUser, setUserLogged, isLogout } = userSlice.actions;
+export const {
+  startLoadingUser,
+  setUserLogged,
+  isLogout,
+  setMessage,
+  finishLoadingUser,
+} = userSlice.actions;

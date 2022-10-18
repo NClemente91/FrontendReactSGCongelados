@@ -1,7 +1,6 @@
 .checkoutContainerGrl {
   width: 100vw;
   min-height: calc(100vh - 200px);
-  margin-top: 60px;
   background-image: url("../../utils/images/FondoClaro.png");
   background-position: center;
   background-repeat: repeat;
@@ -45,7 +44,7 @@
 }
 
 .productResumenContainer-text {
-  width: 100px;
+  width: 200px;
   margin: 5px 40px 5px;
 }
 .productResumenContainer-text_p {
