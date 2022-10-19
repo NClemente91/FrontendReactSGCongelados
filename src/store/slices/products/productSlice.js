@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  page: 1,
-  totalPages: 1,
-  products: [],
+  productsData: { results: [], currentPage: 1, totalPages: 1 },
+  lastCategory: null,
   productDetail: [],
   isLoading: false,
 };
@@ -21,9 +20,8 @@ export const productSlice = createSlice({
     },
     setProducts: (state, action) => {
       state.isLoading = false;
-      state.products = action.payload.products;
-      state.page = action.payload.page;
-      state.totalPages = action.payload.totalPages;
+      state.productsData = action.payload.productsData;
+      state.lastCategory = action.payload.category;
     },
     setProductDetail: (state, action) => {
       state.isLoading = false;
@@ -37,4 +35,5 @@ export const {
   setProducts,
   setProductDetail,
   resetPages,
+  setLastCategory,
 } = productSlice.actions;

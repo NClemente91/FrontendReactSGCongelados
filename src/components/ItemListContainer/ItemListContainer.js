@@ -10,18 +10,18 @@ import { Pagination, Stack } from "@mui/material";
 
 const ItemListContainer = () => {
   const dispatch = useDispatch();
-  let { products, isLoading, page, totalPages } = useSelector(
+  let { productsData, isLoading, lastCategory } = useSelector(
     (state) => state.products
   );
   const { category } = useParams();
 
   useEffect(() => {
-    dispatch(getProducts(category, page));
-  }, [category, dispatch, page, totalPages]);
+    dispatch(getProducts(category, productsData.currentPage, lastCategory));
+  }, [category, dispatch, productsData.currentPage, lastCategory]);
 
   const handleChange = (e, value) => {
     e.preventDefault();
-    dispatch(getProducts(category, value));
+    dispatch(getProducts(category, value, lastCategory));
   };
 
   return (
@@ -43,20 +43,22 @@ const ItemListContainer = () => {
         </div>
       </section>
       {isLoading && <div className="loader center-spin" />}
-      {!isLoading && (
+      {!isLoading && productsData.results.length !== 0 && (
         <>
-          <ItemList products={products} />
-          <div className="pagination-section">
-            <Stack spacing={2}>
-              <Pagination
-                count={totalPages}
-                page={page}
-                variant="outlined"
-                shape="rounded"
-                onChange={handleChange}
-              />
-            </Stack>
-          </div>
+          <ItemList products={productsData.results} />
+          {productsData.totalPages > 1 && (
+            <div className="pagination-section">
+              <Stack spacing={2}>
+                <Pagination
+                  count={productsData.totalPages}
+                  page={productsData.currentPage}
+                  variant="outlined"
+                  shape="rounded"
+                  onChange={handleChange}
+                />
+              </Stack>
+            </div>
+          )}
         </>
       )}
     </div>

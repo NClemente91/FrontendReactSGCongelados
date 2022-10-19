@@ -5,7 +5,7 @@ export const getAllProducts = async (page) => {
 
   try {
     const { data } = await sgCongeladosApi.get(
-      `/product/all?page=${page - 1}&size=6`
+      `/product/all?page=${page - 1}&size=8`
     );
 
     if (data.data.results.length === 0) {
@@ -25,7 +25,7 @@ export const getProductsByCategory = async (category, page) => {
 
   try {
     const { data } = await sgCongeladosApi.get(
-      `/product/category/${category}?page=${page - 1}&size=6`
+      `/product/category/${category}?page=${page - 1}&size=8`
     );
 
     if (data.data.results.length === 0) {
