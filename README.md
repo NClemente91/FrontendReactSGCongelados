@@ -1,70 +1,35 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+SG-CONGELADOS-APP
 
-## Available Scripts
+Aplicación de caracter educativo para AYI Academy
 
-In the project directory, you can run:
+Este proyecto fue construido con [Create React App](https://github.com/facebook/create-react-app).
 
-### `npm start`
+## Paso a paso para utilizar la aplicación
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### SERVIDOR
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1- Descargar o clonar el proyecto realizado con Java para poder correr el servidor propio de la aplicación [Backend SG Congelados](https://github.com/NClemente91/BackendJavaSGCongelados.git)
 
-### `npm test`
+2- Una vez descargado, abrir el proyecto con un ide y asegurarse de que se instalen todas las dependencias.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3- Se deberá tener instalado MySql y asegurarse de que este corriendo en su máquina. Además, desde alguna herramienta de gestión de base de datos, MySQL Workbench por ejemplo, crear un esquema de base de datos con el nombre de "sg_congelados_db". Asegurarse de que el nombre sea el correcto.
 
-### `npm run build`
+4- Correr el servidor configurando previamente las variables de entorno del proyecto como lo son DB_PORT=3306, DB_HOST=localhost, DB_USERNAME="tu usuario de base de datos", DB_PASSWORD="tu contraseña de base de datos" y DB_DATABASE=sg_congelados_db.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+5- Controlar que el servidor este funcionando de manera correcta desde Postman o desde Swagger en el siguiente link [Swagger](http://localhost:8080/swagger-ui.html#!/). Se puede hacer una prueba con productos que ya vienen precargados.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### APLICACION
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1- Descargar o clonar el proyecto realizado con React para poder correr la aplicación [Frontend SG Congelados](https://github.com/NClemente91/FrontendReactSGCongelados.git)
 
-### `npm run eject`
+2- Una vez descargado, abrir el proyecto con un editor de código y desde la terminal ejecutar `npm i` o `npm install` para que descargue todas las dependencias.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3- Ejecutar la aplicación en modo de desarrollo con `npm start`. Abrir [http://localhost:3000](http://localhost:3000) para ver que se este ejecutando de manera correcta.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4- Ejecutar `npm run build` para generar la carpeta "build" desde donde se ejecutará la aplicacion.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+5- Si no se tiene instalado el comando `serve`, hacerlo con el siguiente comando `npm i -g serve`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+6- Correr la aplicación con `serve -s build`. Abrir [http://localhost:3000](http://localhost:3000) para ver la aplicación final.

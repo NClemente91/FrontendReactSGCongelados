@@ -15,6 +15,11 @@
   color: #f25c05;
 }
 
+.productContainer-nav a:hover {
+  color: white;
+}
+
+
 .productContainer-navGral {
   width: 90%;
   height: 75px;
@@ -54,7 +59,7 @@
 .pagination-section{
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 @keyframes spin {

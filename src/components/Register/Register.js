@@ -45,6 +45,7 @@ const Register = () => {
           city: event.target.city.value,
         },
       };
+
       dispatch(registerUser(newUser));
     }
   };
@@ -100,6 +101,16 @@ const Register = () => {
         setMessage({
           type: "error",
           detail: "Debes ingresar una contraseña",
+        })
+      );
+      return false;
+    }
+
+    if (password.length < 6 || confirmPassword < 6) {
+      dispatch(
+        setMessage({
+          type: "error",
+          detail: "La contraseña debe contener al menos 6 caracteres",
         })
       );
       return false;
@@ -191,6 +202,7 @@ const Register = () => {
               Registrate
             </Typography>
             <Box
+              id="form-register"
               component="form"
               noValidate
               onSubmit={(e) => handleSubmit(e)}

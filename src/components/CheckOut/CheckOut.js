@@ -127,7 +127,7 @@ const CheckOut = () => {
             Muchas gracias por tu compra
           </h2>
           <div className="cartContainerGrl-empty_image">
-            <img src="/assets/images/icons/cf-icon.svg" alt="Logo triste" />
+            <img src="/assets/images/icons/cf-icon.svg" alt="Logo feliz" />
           </div>
           <Typography component="h6" variant="h6">
             {message && <Alert severity={message.type}>{message.detail}</Alert>}
@@ -160,6 +160,35 @@ const CheckOut = () => {
               {" "}
               {savedOrder.created_at}{" "}
             </span>
+          </p>
+          <Link to="/" className="btn-finally">
+            <button
+              className="btn btn-important"
+              id="bg-color-btn"
+              onClick={() => handleCloseDetailOrder()}
+            >
+              <span className="color-btn">VOLVER AL INICIO</span>
+            </button>
+          </Link>
+        </div>
+      )}
+
+      {isLoadingOrder && message && message.type === "error" && (
+        <div className="checkoutContainerGrl-finallyBuy">
+          <h2 className="checkoutContainerGrl-finallyBuy_title">
+            Hubo un error inesperado y no se pudo concretar la compra
+          </h2>
+          <div className="cartContainerGrl-empty_image">
+            <img src="/assets/images/icons/cf-icon.svg" alt="Logo triste" />
+          </div>
+          <Typography component="h6" variant="h6">
+            {message && <Alert severity={message.type}>{message.detail}</Alert>}
+          </Typography>
+          <p className="checkoutContainerGrl-finallyBuy-order">
+            Vuelve a elegir los productos que desees.
+          </p>
+          <p className="checkoutContainerGrl-finallyBuy-order">
+            Disculpa por las molestias ocacionadas
           </p>
           <Link to="/" className="btn-finally">
             <button
