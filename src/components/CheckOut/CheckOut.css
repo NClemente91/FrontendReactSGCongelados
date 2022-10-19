@@ -74,7 +74,7 @@
 }
 
 .checkoutContainerGrl-finallyBuy {
-  width: 500px;
+  width: 700px;
   height: 500PX;
   margin: 0 auto;
   background-color: white;
@@ -83,12 +83,12 @@
 }
 .checkoutContainerGrl-finallyBuy-order {
   width: 90%;
-  margin: 15px auto;
+  margin: 0 auto;
 }
 .checkoutContainerGrl-finallyBuy-order_p {
   font-weight: 700;
 }
 .btn-finally {
   position: relative;
-  left: 175px;
+  left: 275px;
 }

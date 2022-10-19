@@ -57,7 +57,6 @@ const Register = () => {
     const lastName = data.lastName.value;
     const street = data.street.value;
     const streetNumber = data.streetNumber.value;
-    const apartment = data.apartment.value;
     const city = data.city.value;
 
     if (!name) {
@@ -139,16 +138,6 @@ const Register = () => {
       );
       return false;
     }
-
-    // if (!apartment) {
-    //   dispatch(
-    //     setMessage({
-    //       type: "error",
-    //       detail: "Debes completar el departamento o casa",
-    //     })
-    //   );
-    //   return false;
-    // }
 
     if (!streetNumber) {
       dispatch(

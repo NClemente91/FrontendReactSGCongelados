@@ -17,7 +17,7 @@ const CardWidget = () => {
         <span className="logoCarrito-link-quantity">{totalQuantity}</span>
         <img
           className="logoCarrito-link-img"
-          src="/assets/images/icons/Carrito.svg"
+          src="./assets/images/icons/Carrito.svg"
           alt="Carrito"
         />
       </Link>
