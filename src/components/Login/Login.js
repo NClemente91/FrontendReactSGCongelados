@@ -7,6 +7,7 @@ import { setMessage } from "../../store/slices/users/userSlice";
 import "../Login/Login.css";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import SaveIcon from "@mui/icons-material/Save";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   Avatar,
@@ -19,13 +20,16 @@ import {
   Typography,
   Alert,
 } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const theme = createTheme();
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { message, isLogged } = useSelector((state) => state.user);
+  const { message, isLogged, isLoadingUser } = useSelector(
+    (state) => state.user
+  );
 
   React.useEffect(() => {
     if (isLogged) {
@@ -60,7 +64,7 @@ const Login = () => {
     }
 
     const emailRegex =
-      /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/i;
+      /^(([^<>()[\]\\.,;:\s@”]+(\.[^<>()[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/i;
 
     if (!emailRegex.test(email)) {
       dispatch(
@@ -153,14 +157,28 @@ const Login = () => {
                   <Alert severity={message.type}>{message.detail}</Alert>
                 )}
               </Typography>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Iniciar Sesión
-              </Button>
+              {!isLoadingUser ? (
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Iniciar Sesión
+                </Button>
+              ) : (
+                <LoadingButton
+                  loading
+                  color="primary"
+                  fullWidth
+                  loadingPosition="start"
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  startIcon={<SaveIcon />}
+                >
+                  Iniciar Sesión
+                </LoadingButton>
+              )}
               <Grid container justifyContent="center">
                 <Grid item>
                   <Link to="/register">¿No estás registrado? Click acá</Link>

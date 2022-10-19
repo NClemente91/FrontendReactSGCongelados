@@ -1,7 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import { clientsClaim } from "workbox-core";
 import { precacheAndRoute } from "workbox-precaching";
-// import { updateDynamicCache } from "./swUtils";
 
 //Le da el poder al service worker
 clientsClaim();
@@ -18,15 +17,6 @@ const CACHE_INMUTABLE = "cache-inmutable-nico-v1";
 const APP_SHELL = ["/favicon.ico", "/", "index.html"]; //cualquier otra imagen que sea "común" y no cambie en la pagina como un logo o una imagen de fondo
 
 const APP_SHELL_INMUTABLE = [];
-
-// This allows the web app to trigger skipWaiting via registration.waiting.postMessage({type: 'SKIP_WAITING'})
-self.addEventListener("message", (e) => {
-  if (e.data && e.data.type === "SKIP_WAITING") {
-    self.skipWaiting();
-  }
-});
-
-// Any other custom service worker logic can go here.
 
 self.addEventListener("install", (e) => {
   const promesaStatic = caches
@@ -55,48 +45,4 @@ self.addEventListener("activate", (e) => {
 
   //Esperamos que se limpie para terminar la activacion
   e.waitUntil(respuesta);
-});
-
-// self.addEventListener("fetch", (e) => {
-
-//   console.log(e.request.url);
-//   //Url de
-//   let url = "url"
-//   let resp;
-
-//   if(e.request.url.indexOf(url) > -1){
-//     resp = caches.match(e.request)
-//       .then(cacheResp => {
-//         if(cacheResp) return cacheResp
-//         return fetch(url)
-//           .then(res => res.json())
-//           .then(body => {
-//             let resArray = [];
-//             for(let key in body){
-//               let json = body[key]
-//               resArray.push(json)
-//             }
-//             caches.open(CACHE_DYNAMIC)
-//               .then(cache => {
-//                 cache.put(e.request.url, new Response(resArray))
-//               })
-//             return new Response(resArray)
-//           })
-//       })
-//   } else {
-//     resp.caches.match(e.request.url)
-//       .then(cacheResp => {
-//         if(cacheResp) return cacheResp;
-//         return fetch(e.request)
-//           .then(fetchResp => {
-//             return updateDynamicCache(CACHE_DYNAMIC, e.request, fetchResp)
-//           })
-//       })
-//   }
-
-//   e.respondWith(resp)
-// });
-
-self.addEventListener("push", (e) => {
-  console.log(e.data);
 });
