@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# APLICACION PARA TIENDA DE PRODUCTOS CONGELADOS
 
-SG-CONGELADOS-APP
+Eccomerce para SG Congelados
 
 Aplicación de caracter educativo para AYI Academy
 
