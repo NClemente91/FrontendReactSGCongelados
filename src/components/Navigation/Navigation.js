@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { isLogout } from "../../store/slices/users/userSlice";
+import { clearCart } from "../../store/slices/cart/cartSlice";
 
 import "../Navigation/Navigation.css";
 
@@ -14,6 +15,7 @@ const Navigation = () => {
   const hanldeClickLogout = (event) => {
     event.preventDefault();
     dispatch(isLogout());
+    dispatch(clearCart());
     navigate("/");
   };
 
